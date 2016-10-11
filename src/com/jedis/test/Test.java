@@ -52,9 +52,14 @@ public class Test {
 		Map<String, String> user = new HashMap<String, String>();
 		user.put("code", "1245");
 		user.put("name", "lose");
+		user.put("pass", "pass");
 		jedis.hmset("user",user);
-		
-		Iterator<E>
+		Iterator<String> it = jedis.hkeys("user").iterator();
+		while(it.hasNext()){
+			System.out.println("hmget:"+jedis.hmget("user",it.next()));
+		}
+		jedis.hdel("user", "pass");
+		System.out.println("hdel:"+jedis.hmget("user", "pass"));
 		
 	}
 	
